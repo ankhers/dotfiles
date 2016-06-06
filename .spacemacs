@@ -309,6 +309,8 @@ layers configuration. You are free to put any user code."
   (load-file "~/work/personal/haskell-ide-engine/elisp/hie.el")
   (require 'hie)
   (add-hook 'haskell-mode-hook 'hie-mode)
+
+  (setq flycheck-check-syntax-automatically '(save new-line))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
