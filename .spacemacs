@@ -26,22 +26,19 @@ values."
      ;;
      ;; Languages
      ;;
-     c-c++
-     common-lisp
-     elixir
+     ;; c-c++
+     ;; common-lisp
      emacs-lisp
-     elm
+     ;; elm
      erlang
-     go
+     elixir
      ;; haskell
      html
-     idris
-     java
-     javascript
-     latex
-     lua
+     ;; java
+     (javascript :variables
+                 js2-strict-missing-semi-warning nil)
+     ;; latex
      markdown
-     purescript
      racket
      ruby
      rust
@@ -62,7 +59,7 @@ values."
      github
      org
      colors
-     jabber
+     ;; jabber
      restclient
 
      ;;
@@ -78,7 +75,7 @@ values."
      ;;
      ;; Email
      ;;
-     gnus
+     ;; gnus
 
      ;;
      ;; Config Files
@@ -289,7 +286,7 @@ values."
    dotspacemacs-default-package-repository nil
    ;; Delete whitespace while saving buffer. Possible values are `all'
    ;; to aggressively delete empty line and long sequences of whitespace,
-   ;; `trailing' to delete only the whitespace at end of lines, `changed'to
+   ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup 'all
@@ -310,7 +307,18 @@ layers configuration. You are free to put any user code."
   (require 'hie)
   (add-hook 'haskell-mode-hook 'hie-mode)
 
-  (setq flycheck-check-syntax-automatically '(save new-line))
+  ;; (setq whitespace-style '(face tabs spaces lines-tail tailing space-before-tab empty space-after-tab))
+  (setq whitespace-style '(face empty space-before-tab trailing space-after-tab lines-tail))
+  (add-hook 'prog-mode-hook 'whitespace-mode)
+
+  (sp-with-modes '(elixir-mode)
+    (sp-local-pair "fn" "end"
+                   :when '(("SPC" "RET"))
+                   :actions '(insert navigate))
+    (sp-local-pair "do" "end"
+                   :when '(("SPC" "RET"))
+                   :post-handlers '(sp-ruby-def-post-handler)
+                   :actions '(insert navigate)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -320,7 +328,11 @@ layers configuration. You are free to put any user code."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(paradox-github-token t))
+ '(paradox-github-token t)
+ '(safe-local-variable-values
+   (quote
+    ((haskell-process-use-ghci . t)
+     (haskell-indent-spaces . 4)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
