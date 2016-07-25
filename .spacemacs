@@ -35,8 +35,7 @@ values."
      ;; haskell
      html
      ;; java
-     (javascript :variables
-                 js2-strict-missing-semi-warning nil)
+     javascript
      ;; latex
      markdown
      racket
@@ -319,6 +318,15 @@ layers configuration. You are free to put any user code."
                    :when '(("SPC" "RET"))
                    :post-handlers '(sp-ruby-def-post-handler)
                    :actions '(insert navigate)))
+
+  ;; Elixir
+  (setq
+   alchemist-hooks-test-on-save t
+   alchemist-test-status-modeline t)
+
+  ;; Javascript
+  (setq
+   js2-strict-missing-semi-warning nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
