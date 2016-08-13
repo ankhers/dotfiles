@@ -319,6 +319,10 @@ layers configuration. You are free to put any user code."
                    :post-handlers '(sp-ruby-def-post-handler)
                    :actions '(insert navigate)))
 
+  ;; Javascript
+  (setq
+   js2-strict-missing-semi-warning nil)
+
   ;; ERC
   (setq
    erc-join-buffer 'bury)
