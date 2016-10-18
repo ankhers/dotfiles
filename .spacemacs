@@ -29,13 +29,14 @@ values."
      ;; c-c++
      ;; common-lisp
      emacs-lisp
-     ;; elm
+     elm
      erlang
      elixir
      ;; haskell
      html
      ;; java
-     javascript
+     (javascript :variables
+                 javascript-disable-tern-port-files nil)
      ;; latex
      markdown
      racket
@@ -159,7 +160,8 @@ values."
                          solarized-dark
                          leuven
                          monokai
-                         zenburn)
+                         zenburn
+                         cyberpunk)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -310,17 +312,19 @@ layers configuration. You are free to put any user code."
   (setq whitespace-style '(face empty space-before-tab trailing space-after-tab lines-tail))
   (add-hook 'prog-mode-hook 'whitespace-mode)
 
-  (sp-with-modes '(elixir-mode)
-    (sp-local-pair "fn" "end"
-                   :when '(("SPC" "RET"))
-                   :actions '(insert navigate))
-    (sp-local-pair "do" "end"
-                   :when '(("SPC" "RET"))
-                   :post-handlers '(sp-ruby-def-post-handler)
-                   :actions '(insert navigate)))
+  ;; (sp-with-modes '(elixir-mode)
+  ;;   (sp-local-pair "fn" "end"
+  ;;                  :when '(("SPC" "RET"))
+  ;;                  :actions '(insert navigate))
+  ;;   (sp-local-pair "do" "end"
+  ;;                  :when '(("SPC" "RET"))
+  ;;                  :post-handlers '(sp-ruby-def-post-handler)
+  ;;                  :actions '(insert navigate)))
 
   ;; Javascript
   (setq
+   js2-basic-offset 2
+   js-indent-level 2
    js2-strict-missing-semi-warning nil)
 
   ;; ERC
@@ -339,6 +343,9 @@ layers configuration. You are free to put any user code."
  '(magit-commit-arguments
    (quote
     ("--gpg-sign=Justin Wood <justin.k.wood@gmail.com>")))
+ '(package-selected-packages
+   (quote
+    (anzu ht inflections ob-elixir org helm-purpose window-purpose imenu-list flyspell-correct yasnippet magit-popup async minitest pug-mode f undo-tree js2-mode s iedit elixir-mode markdown-mode ws-butler spaceline persp-mode open-junk-file neotree js2-refactor indent-guide help-fns+ helm-themes helm-descbinds helm-ag evil-unimpaired evil-search-highlight-persist elm-mode alchemist ace-link smartparens helm helm-core haskell-mode flycheck magit git-commit hydra projectile zenburn-theme yaml-mode with-editor window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit sql-indent spacemacs-theme solarized-theme smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer quelpa projectile-rails powerline popwin paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets ob-http nix-mode mwim multiple-cursors move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc jade-mode intero info+ ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-nixos-options helm-mode-manager helm-make helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flycheck-elm flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks emmet-mode elisp-slime-nav dumb-jump define-word dash-at-point cyberpunk-theme company-web company-tern company-statistics company-nixos-options column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
