@@ -30,8 +30,9 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(python
      graphviz
+     ivy
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -40,8 +41,6 @@ values."
      ;;
      ;; Languages
      ;;
-     ;; c-c++
-     ;; common-lisp
      csv
      emacs-lisp
      (elm :variables elm-sort-imports-on-save t)
@@ -49,12 +48,11 @@ values."
      elixir
      intero ;; haskell
      html
-     ;; java
      idris
      (javascript :variables
                  javascript-disable-tern-port-files nil)
-     ;; latex
      markdown
+     purescript
      racket
      ruby
      rust
@@ -75,7 +73,6 @@ values."
      github
      org
      colors
-     ;; jabber
      restclient
 
      ;;
@@ -95,23 +92,19 @@ values."
             ("irc.ankhers.net"
              :port "5000"
              :ssl t
-             :nick "Ankhers/mozilla")))
-     ;;
-     ;; Email
-     ;;
-     ;; gnus
+             :nick "Ankhers/mozilla")
+            ("irc.ankhers.net"
+             :port "5000"
+             :ssl t
+             :nick "Ankhers/snoonet")))
 
      ;;
      ;; Config Files
      ;;
      docker
 
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      spell-checking
      syntax-checking
-     ;; version-control
 
      nixos
      )
@@ -194,7 +187,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
+   dotspacemacs-themes '(rebecca
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -432,6 +426,9 @@ ce-after-tab lines-tail))
   (setq tls-program '("openssl s_client -connect %h:%p -no_ssl2 -ign_eof"
                       "gnutls-cli --x509cafile %t -p %p %h --protocols ssl3"
                       "gnutls-cli --x509cafile %t -p %p %h"))
+
+  (eval-after-load 'rng-loc
+    '(add-to-list 'rng-schema-locating-files "~/schemas.xml"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -447,7 +444,7 @@ ce-after-tab lines-tail))
     ("--gpg-sign=Justin Wood <justin.k.wood@gmail.com>")))
  '(package-selected-packages
    (quote
-    (request pcre2el spinner company rake restclient-helm ob-restclient company-restclient know-your-http-well highlight auto-complete gh rust-mode inf-ruby dash hide-comnt dockerfile-mode docker tablist docker-tramp anzu ht inflections ob-elixir org helm-purpose window-purpose imenu-list flyspell-correct yasnippet magit-popup async minitest pug-mode f undo-tree js2-mode s iedit elixir-mode markdown-mode ws-butler spaceline persp-mode open-junk-file neotree js2-refactor indent-guide help-fns+ helm-themes helm-descbinds helm-ag evil-unimpaired evil-search-highlight-persist elm-mode alchemist ace-link smartparens helm helm-core haskell-mode flycheck magit git-commit hydra projectile zenburn-theme yaml-mode with-editor window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit sql-indent spacemacs-theme solarized-theme smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer quelpa projectile-rails powerline popwin paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets ob-http nix-mode mwim multiple-cursors move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc jade-mode intero info+ ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-nixos-options helm-mode-manager helm-make helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flycheck-elm flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks emmet-mode elisp-slime-nav dumb-jump define-word dash-at-point cyberpunk-theme company-web company-tern company-statistics company-nixos-options column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
+    (unfill org-category-capture idris-mode packed avy skewer-mode evil request pcre2el spinner company rake restclient-helm ob-restclient company-restclient know-your-http-well highlight auto-complete gh rust-mode inf-ruby dash hide-comnt dockerfile-mode docker tablist docker-tramp anzu ht inflections ob-elixir org helm-purpose window-purpose imenu-list flyspell-correct yasnippet magit-popup async minitest pug-mode f undo-tree js2-mode s iedit elixir-mode markdown-mode ws-butler spaceline persp-mode open-junk-file neotree js2-refactor indent-guide help-fns+ helm-themes helm-descbinds helm-ag evil-unimpaired evil-search-highlight-persist elm-mode alchemist ace-link smartparens helm helm-core haskell-mode flycheck magit git-commit hydra projectile zenburn-theme yaml-mode with-editor window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit sql-indent spacemacs-theme solarized-theme smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer quelpa projectile-rails powerline popwin paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets ob-http nix-mode mwim multiple-cursors move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc jade-mode intero info+ ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-nixos-options helm-mode-manager helm-make helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flycheck-elm flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks emmet-mode elisp-slime-nav dumb-jump define-word dash-at-point cyberpunk-theme company-web company-tern company-statistics company-nixos-options column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
@@ -460,6 +457,7 @@ ce-after-tab lines-tail))
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -476,7 +474,7 @@ This function is called at the very end of Spacemacs initialization."
     ("--gpg-sign=Justin Wood <justin.k.wood@gmail.com>")))
  '(package-selected-packages
    (quote
-    (log4e idris-mode prop-menu seq alert rcirc-notify rcirc-color winum magithub evil avy haml-mode fuzzy flycheck-credo faceup packed csv-mode request pcre2el spinner company rake restclient-helm ob-restclient company-restclient know-your-http-well highlight auto-complete gh rust-mode inf-ruby dash hide-comnt dockerfile-mode docker tablist docker-tramp anzu ht inflections ob-elixir org helm-purpose window-purpose imenu-list flyspell-correct yasnippet magit-popup async minitest pug-mode f undo-tree js2-mode s iedit elixir-mode markdown-mode ws-butler spaceline persp-mode open-junk-file neotree js2-refactor indent-guide help-fns+ helm-themes helm-descbinds helm-ag evil-unimpaired evil-search-highlight-persist elm-mode alchemist ace-link smartparens helm helm-core haskell-mode flycheck magit git-commit hydra projectile zenburn-theme yaml-mode with-editor window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit sql-indent spacemacs-theme solarized-theme smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer quelpa projectile-rails powerline popwin paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets ob-http nix-mode mwim multiple-cursors move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc jade-mode intero info+ ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-nixos-options helm-mode-manager helm-make helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flycheck-elm flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks emmet-mode elisp-slime-nav dumb-jump define-word dash-at-point cyberpunk-theme company-web company-tern company-statistics company-nixos-options column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
+    (psci purescript-mode psc-ide unfill org-category-capture idris-mode packed avy skewer-mode evil request pcre2el spinner company rake restclient-helm ob-restclient company-restclient know-your-http-well highlight auto-complete gh rust-mode inf-ruby dash hide-comnt dockerfile-mode docker tablist docker-tramp anzu ht inflections ob-elixir org helm-purpose window-purpose imenu-list flyspell-correct yasnippet magit-popup async minitest pug-mode f undo-tree js2-mode s iedit elixir-mode markdown-mode ws-butler spaceline persp-mode open-junk-file neotree js2-refactor indent-guide help-fns+ helm-themes helm-descbinds helm-ag evil-unimpaired evil-search-highlight-persist elm-mode alchemist ace-link smartparens helm helm-core haskell-mode flycheck magit git-commit hydra projectile zenburn-theme yaml-mode with-editor window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package toml-mode toc-org tagedit sql-indent spacemacs-theme solarized-theme smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe restclient restart-emacs rbenv rainbow-mode rainbow-identifiers rainbow-delimiters racket-mode racer quelpa projectile-rails powerline popwin paradox orgit org-projectile org-present org-pomodoro org-plus-contrib org-download org-bullets ob-http nix-mode mwim multiple-cursors move-text monokai-theme mmm-mode markdown-toc magit-gitflow magit-gh-pulls macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode json-mode js-doc jade-mode intero info+ ido-vertical-mode hungry-delete htmlize hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-swoop helm-projectile helm-nixos-options helm-mode-manager helm-make helm-gitignore helm-flx helm-dash helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh-md flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-mix flycheck-elm flx-ido fill-column-indicator feature-mode fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu erlang erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks emmet-mode elisp-slime-nav dumb-jump define-word dash-at-point cyberpunk-theme company-web company-tern company-statistics company-nixos-options column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode chruby cargo bundler auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-jump-helm-line ac-ispell)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
