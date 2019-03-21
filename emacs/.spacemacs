@@ -54,7 +54,6 @@ values."
      kotlin
      lua
      markdown
-     ocaml
      purescript
      racket
      ruby
