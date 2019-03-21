@@ -90,13 +90,13 @@ values."
           erc-server-list
           '(("freenode.ankhers.net"
              :port "5000"
-             :nick "Ankhers/freenode")
+             :nick "Ankhers")
             ("mozilla.ankhers.net"
              :port "5000"
-             :nick "Ankhers/mozilla")
+             :nick "Ankhers")
             ("snoonet.ankhers.net"
              :port "5000"
-             :nick "Ankhers/snoonet")
+             :nick "Ankhers")
             ))
           ;; '(("irc.ankhers.net"
           ;;    :port "5000"
